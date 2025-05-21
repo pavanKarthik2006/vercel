@@ -19,8 +19,13 @@ app.add_middleware(
 # Get the directory of the current file
 current_dir = os.path.dirname(os.path.abspath(__file__))
 # Load student marks data from the same directory as this file
-with open(os.path.join(current_dir, 'q-vercel-python.json')) as f:
-    students_data = json.load(f)
+
+try:
+    with open(os.path.join(current_dir, 'q-vercel-python.json')) as f:
+        students_data = json.load(f)
+except Exception as e:
+    students_data = []
+    print("Error loading q-vercel-python.json:", e)
 
 @app.get("/api")
 async def get_marks(name: List[str] = Query(None)):
