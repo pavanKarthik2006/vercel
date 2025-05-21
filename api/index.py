@@ -26,6 +26,8 @@ try:
 except Exception as e:
     students_data = []
     print("Error loading q-vercel-python.json:", e)
+    print("Failed to load JSON file!")
+    print(traceback.format_exc())
 
 @app.get("/api")
 async def get_marks(name: List[str] = Query(None)):
